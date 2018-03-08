@@ -1,0 +1,10 @@
+Install all dependencies
+pip3 install --user -r requirements.txt
+
+Start Flask’s built-in web server
+flask run
+
+In another terminal window, start phpLiteAdmin
+phpliteadmin finance.db
+
+http://flask.pocoo.org/

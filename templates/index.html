@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <h1>User Name: {{ username }}</h1>
+    <h1>Cash: {{ cash }}</h1>
+    <h1>Total: {{ total }}</h1>
+    <table>
+    <tr>
+        <th>Symbol</th>
+        <th>Share</th>
+        <th>Price</th>
+        <th>Value</th>
+    </tr>
+    {% for stock in stocks %}
+    <tr>
+        <td>{{stock["symbol"]}}</td>
+        <td>{{stock["share"]}}</td>
+        <td>{{stock["price"]}}</td>
+        <td>{{stock["value"]}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

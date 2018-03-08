@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table>
+    <tr>
+        <th width="20%">Symbol</th>
+        <th width="20%">Tran_status</th>
+        <th width="20%">Price</th>
+        <th width="20%">Share</th>
+        <th width="20%">Time</th>
+    </tr>
+    {% for entry in form %}
+    <tr>
+        <td>{{entry["symbol"]}}</td>
+        <td>{{entry["tran_status"]}}</td>
+        <td>{{entry["price"]}}</td>
+        <td>{{entry["share"]}}</td>
+        <td>{{entry["time"]}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
