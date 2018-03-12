@@ -58,7 +58,7 @@ auth_token = "078646e981762318d5aeb167ce1d0feb"
 client = Client(account_sid, auth_token)
 
 @app.route("/")
-@login_required
+#@login_required
 def index():
     if request.method == "POST":
         return render_template("index.html")
@@ -86,7 +86,7 @@ def index():
         return render_template("index.html", username=username, cash=cash, total=total, stocks=stocks)
 
 @app.route("/buy", methods=["GET", "POST"])
-@login_required
+#@login_required
 def buy():
     """Buy shares of stock."""
     # if user reached route via POST (as by submitting a form via POST)
@@ -136,7 +136,7 @@ def buy():
         return render_template("buy.html", condition=0)
 
 @app.route("/history")
-@login_required
+#@login_required
 def history():
     """Show history of transactions."""
     if request.method == "POST":
@@ -204,7 +204,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/quote", methods=["GET", "POST"])
-@login_required
+#@login_required
 def quote():
     """Get stock quote."""
     # if user reached route via POST (as by submitting a form via POST)
@@ -276,7 +276,7 @@ def register():
         return render_template("register.html")
 
 @app.route("/sell", methods=["GET", "POST"])
-@login_required
+#@login_required
 def sell():
     """Sell shares of stock."""
     # if user reached route via POST (as by submitting a form via POST)
@@ -337,7 +337,7 @@ def sell():
 
 
 @app.route("/funtext", methods=["GET", "POST"])
-@login_required
+#@login_required
 def funtext():
     if request.method == "POST":
         message = request.form.get('Message')
@@ -362,7 +362,7 @@ def send_image(filename):
     return send_from_directory("images", filename)
 
 @app.route('/myblogIndex')
-@login_required
+#@login_required
 def myblogIndex():
     #db.execute("DROP TABLE blog")
     #db.execute("CREATE TABLE blog (id int, title varchar(255), content varchar(65535), image_name varchar(255), timestamp varchar(255))")
@@ -371,7 +371,7 @@ def myblogIndex():
     return render_template("blogIndex.html", entries=query)
 
 @app.route('/createMyBlog', methods=["GET", "POST"])
-@login_required
+#@login_required
 def createMyBlog():
     if request.method == "POST":
         target = os.path.join(APP_ROOT, 'images/')
