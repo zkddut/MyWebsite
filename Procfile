@@ -1,1 +1,1 @@
-web: gunicorn myWebsite:application
+web: gunicorn app:app

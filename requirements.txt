@@ -12,3 +12,4 @@ micawber
 BeautifulSoup4
 cs50
 pandas_datareader
+gunicorn
