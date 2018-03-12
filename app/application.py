@@ -58,7 +58,7 @@ auth_token = "078646e981762318d5aeb167ce1d0feb"
 client = Client(account_sid, auth_token)
 
 @app.route("/")
-#@login_required
+@login_required
 def index():
     if request.method == "POST":
         return render_template("index.html")
@@ -86,7 +86,7 @@ def index():
         return render_template("index.html", username=username, cash=cash, total=total, stocks=stocks)
 
 @app.route("/buy", methods=["GET", "POST"])
-#@login_required
+@login_required
 def buy():
     """Buy shares of stock."""
     # if user reached route via POST (as by submitting a form via POST)
@@ -136,7 +136,7 @@ def buy():
         return render_template("buy.html", condition=0)
 
 @app.route("/history")
-#@login_required
+@login_required
 def history():
     """Show history of transactions."""
     if request.method == "POST":
@@ -148,14 +148,13 @@ def history():
         return render_template("history.html", form=form)
 
 @app.route("/game")
-@login_required
+#@login_required
 def game():
     """Show history of transactions."""
     if request.method == "POST":
         return render_template("game.html")
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
-        user_id = session["user_id"]
         return render_template("game.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -276,7 +275,7 @@ def register():
         return render_template("register.html")
 
 @app.route("/sell", methods=["GET", "POST"])
-#@login_required
+@login_required
 def sell():
     """Sell shares of stock."""
     # if user reached route via POST (as by submitting a form via POST)
@@ -366,7 +365,7 @@ def send_image(filename):
 def myblogIndex():
     #db.execute("DROP TABLE blog")
     #db.execute("CREATE TABLE blog (id int, title varchar(255), content varchar(65535), image_name varchar(255), timestamp varchar(255))")
-    query = db.execute("SELECT * FROM blog WHERE id = :user_id ORDER BY timestamp DESC", user_id=session["user_id"])
+    query = db.execute("SELECT * FROM blog ORDER BY timestamp DESC")
     #print (query)
     return render_template("blogIndex.html", entries=query)
 
@@ -390,11 +389,10 @@ def createMyBlog():
         title = request.form.get('title')
         content = request.form.get('content')
         image_name = filename
-        user_id = session["user_id"]
         timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         db.execute(
             "INSERT INTO 'blog' (id, title, content, image_name, timestamp) VALUES (:id, :title, :content, :image_name, :timestamp)",
-            id=user_id, title=title, content=content, image_name=image_name, timestamp=timestamp)
+            id=0, title=title, content=content, image_name=image_name, timestamp=timestamp)
         return redirect(url_for('myblogIndex'))
     else:
         return render_template("blogCreate.html")
