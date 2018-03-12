@@ -1,10 +1,31 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for, send_from_directory, abort, Markup, Response
 from flask_session import Session
 from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 import datetime
 from helpers import *
+from flask_sqlalchemy import SQLAlchemy
+import os
+from twilio.twiml.messaging_response import MessagingResponse, Message
+from twilio.rest import Client
+import urllib
+from markdown import markdown
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.extra import ExtraExtension
+from micawber import bootstrap_basic, parse_html
+from micawber.cache import Cache as OEmbedCache
+from markdown import markdown
+from markdown.extensions.codehilite import CodeHiliteExtension
+from markdown.extensions.extra import ExtraExtension
+from micawber import bootstrap_basic, parse_html
+from micawber.cache import Cache as OEmbedCache
+from time import gmtime, strftime
+
+#TODO: 1. Flask + SQLalchmey http://flask-sqlalchemy.pocoo.org/2.3/quickstart/
+#TODO: 2. Seperate files for application.py
+#TODO: 3. Implement feature for twillo
+#      3.1 Upload image
 
 # configure application
 app = Flask(__name__)
@@ -32,6 +53,11 @@ Session(app)
 
 # configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
+
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+account_sid = "AC848322965649be07a6f69b5f86336424"
+auth_token = "078646e981762318d5aeb167ce1d0feb"
+client = Client(account_sid, auth_token)
 
 @app.route("/")
 @login_required
@@ -310,3 +336,67 @@ def sell():
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("sell.html")
+
+
+@app.route("/funtext", methods=["GET", "POST"])
+@login_required
+def funtext():
+    if request.method == "POST":
+        message = request.form.get('Message')
+        to_number = request.form.get('phone')
+
+        # Grab the relevant phone numbers.
+        from_number = "+14243610437"
+        to_number = "+1{}".format(to_number)
+
+        client.messages.create(
+            to= to_number,
+            from_= from_number,
+            body=message
+        )
+
+        return render_template("funtext.html", sent = True)
+    else:
+        return render_template("funtext.html", sent = False)
+
+@app.route('/images/<filename>')
+def send_image(filename):
+    return send_from_directory("images", filename)
+
+@app.route('/myblogIndex')
+@login_required
+def myblogIndex():
+    #db.execute("DROP TABLE blog")
+    #db.execute("CREATE TABLE blog (id int, title varchar(255), content varchar(65535), image_name varchar(255), timestamp varchar(255))")
+    query = db.execute("SELECT * FROM blog WHERE id = :user_id ORDER BY timestamp DESC", user_id=session["user_id"])
+    #print (query)
+    return render_template("blogIndex.html", entries=query)
+
+@app.route('/createMyBlog', methods=["GET", "POST"])
+@login_required
+def createMyBlog():
+    if request.method == "POST":
+        target = os.path.join(APP_ROOT, 'images/')
+        print(target)
+
+        if not os.path.isdir(target):
+            os.mkdir(target)
+
+        for file in request.files.getlist("file"):
+            print(file)
+            filename = file.filename
+            destination = "/".join([target, filename])
+            print(destination)
+            file.save(destination)
+
+        title = request.form.get('title')
+        content = request.form.get('content')
+        image_name = filename
+        user_id = session["user_id"]
+        timestamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        db.execute(
+            "INSERT INTO 'blog' (id, title, content, image_name, timestamp) VALUES (:id, :title, :content, :image_name, :timestamp)",
+            id=user_id, title=title, content=content, image_name=image_name, timestamp=timestamp)
+        return redirect(url_for('myblogIndex'))
+    else:
+        return render_template("blogCreate.html")

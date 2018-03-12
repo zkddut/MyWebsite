@@ -1,9 +1,11 @@
 import csv
 import urllib.request
-
+import requests
 from flask import redirect, render_template, request, session
 from functools import wraps
-
+import re
+import pandas_datareader.data as web
+import datetime
 
 def apology(message, code=400):
     """Renders message as an apology to user."""
@@ -44,43 +46,13 @@ def lookup(symbol):
     # reject symbol if it contains comma
     if "," in symbol:
         return None
-
-    # query Yahoo for quote
-    # http://stackoverflow.com/a/21351911
-    try:
-
-        # GET CSV
-        url = "http://download.finance.yahoo.com/d/quotes.csv?f=snl1&s={symbol}"
-        webpage = urllib.request.urlopen(url)
-
-        # read CSV
-        datareader = csv.reader(webpage.read().decode("utf-8").splitlines())
-
-        # parse first row
-        row = next(datareader)
-
-        # ensure stock exists
-        try:
-            price = float(row[2])
-        except:
-            return None
-
-        # return stock's name (as a str), price (as a float), and (uppercased) symbol (as a str)
-        return {
-            "name": row[1],
-            "price": price,
-            "symbol": row[0].upper()
-        }
-
-    except:
-        pass
-
     # query Alpha Vantage for quote instead
     # https://www.alphavantage.co/documentation/
     try:
 
         # GET CSV
-        url = "https://www.alphavantage.co/query?apikey=NAJXWIA8D6VN6A3K&datatype=csv&function=TIME_SERIES_INTRADAY&interval=1min&symbol={symbol}"
+        url = "https://www.alphavantage.co/query?apikey=NAJXWIA8D6VN6A3K&datatype=csv&function=TIME_SERIES_INTRADAY&interval=1min&symbol={}".format(symbol)
+        print (url)
         webpage = urllib.request.urlopen(url)
 
         # parse CSV
@@ -91,13 +63,12 @@ def lookup(symbol):
 
         # parse second row
         row = next(datareader)
-
+        print(row)
         # ensure stock exists
         try:
             price = float(row[4])
         except:
             return None
-
         # return stock's name (as a str), price (as a float), and (uppercased) symbol (as a str)
         return {
             "name": symbol.upper(), # for backward compatibility with Yahoo
@@ -111,4 +82,4 @@ def lookup(symbol):
 
 def usd(value):
     """Formats value as USD."""
-    return "${value:,.2f}"
+    return "${0:0.2f}".format(value)

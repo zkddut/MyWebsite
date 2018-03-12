@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Blog entries{% endblock %}
+
+{% block main %}
+    <div>
+        <a href="{{ url_for('createMyBlog') }}">
+            Create Blog!
+        </a>
+    </div>
+    {% for entry in entries %}
+        <div>
+            <h2>{{entry.title}}</h2>
+            <p>Created {{ entry.timestamp }}</p>
+            <p>{{ entry.content }}</p>
+            <img src=" {{url_for('send_image', filename=entry.image_name)}}">
+            <p> </p>
+            <p> </p>
+            <p> </p>
+        </div>
+    {% endfor %}
+{% endblock %}

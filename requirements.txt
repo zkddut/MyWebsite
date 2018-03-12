@@ -2,3 +2,12 @@ Flask
 Flask-Session
 passlib
 SQLAlchemy
+flask_sqlalchemy
+twilio
+requests
+peewee
+pygments
+markdown
+micawber
+BeautifulSoup4
+cs50

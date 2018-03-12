@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Fun Text Send for ZKD
+{% endblock %}
+
+{% block main %}
+    Uploaded
+    <img src=" {{url_for('send_image', filename=image_name)}}">
+{% endblock %}
