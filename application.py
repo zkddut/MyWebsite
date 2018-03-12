@@ -400,3 +400,6 @@ def createMyBlog():
         return redirect(url_for('myblogIndex'))
     else:
         return render_template("blogCreate.html")
+
+if __name__ == "__main__":
+	app.run()
