@@ -8,3 +8,7 @@ In another terminal window, start phpLiteAdmin
 phpliteadmin finance.db
 
 http://flask.pocoo.org/
+
+virtualenv mywebsit_env
+source mywebsit_env/bin/activate
+pip install -r requirments.txt
