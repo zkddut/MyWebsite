@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f88d092-e26b-4e6b-a765-8367ce8d47ed" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/static/hilite.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/blogCreate.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/blogIndex.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/blogdetails.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/blogedit.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/funtext.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/funtext_complete.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/templates/myblog.html" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/run.sh" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/application.py" afterPath="$PROJECT_DIR$/application.py" />
-      <change beforePath="$PROJECT_DIR$/finance.db" afterPath="$PROJECT_DIR$/finance.db" />
-      <change beforePath="$PROJECT_DIR$/helpers.py" afterPath="$PROJECT_DIR$/helpers.py" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html" afterPath="$PROJECT_DIR$/templates/layout.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="application.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5535">
@@ -38,10 +26,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blogIndex.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="blogIndex.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/blogIndex.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="250">
               <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
               <folding />
             </state>
@@ -122,16 +110,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/register.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-42">
-              <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -183,6 +161,7 @@
         <option value="$PROJECT_DIR$/templates/blogCreate.html" />
         <option value="$PROJECT_DIR$/templates/funtext.html" />
         <option value="$PROJECT_DIR$/application.py" />
+        <option value="$PROJECT_DIR$/run.sh" />
       </list>
     </option>
   </component>
@@ -652,14 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/blogIndex.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/blogdetails.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -695,6 +666,22 @@
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/blogIndex.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="18" column="12" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
