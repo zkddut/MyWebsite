@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Create entry{% endblock %}
+
+{% block main %}
+  <form action="{{ url_for('createMyBlog') }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="title" class="col-sm-2 control-label">Title</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="title" name="title" type="text">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Content" class="col-sm-2 control-label">Content</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" id="content" name="content" style="height: 300px; width: 600px"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="file-picker" class="col-sm-2 control-label">Image Upload</label>
+      <div class="col-sm-10">
+        <input id="file-picker" type="file" name="file" accept="image/*" multiple>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button class="btn btn-primary" type="submit" id="upload-button">Create</button>
+      </div>
+    </div>
+  </form>
+
+
+  <script>
+      $("#file-picker").change(function(){
+          var input = document.getElementById('file-picker');
+          for (var i=0; i<input.files.length; i++)
+          {
+          //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+              var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+              if ((ext == 'jpg') || (ext == 'png'))
+              {
+                  $("#msg").text("Files are supported")
+              }
+              else
+              {
+                  $("#msg").text("Files are NOT supported")
+                  document.getElementById("file-picker").value ="";
+              }
+          }
+      } );
+  </script>
+{% endblock %}

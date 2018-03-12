@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Kaidi Zhou's Blog
+{% endblock %}
+
+{% block main %}
+    <form id="MyBlog-form" action="{{ url_for('myblog') }}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="blog-text">
+        <strong>Image:</strong><br>
+        <input id="file-picker" type="file" name="file" accept="image/*" multiple>
+        <div id="msg"></div>
+        <input type="submit" value="Send!" id="upload-button">
+    </form>
+    <!--Need form validation-->
+    {%if sent%}
+        Sent Text!
+    {%else%}
+        Please Send!
+    {% endif %}
+    <div>
+        <img src=" {{url_for('send_image', filename=image_name)}}">
+    </div>
+
+    <script>
+        $("#file-picker").change(function(){
+            var input = document.getElementById('file-picker');
+            for (var i=0; i<input.files.length; i++)
+            {
+            //koala.jpg, koala.JPG substring(index) lastIndexOf('a') koala.1.jpg
+                var ext= input.files[i].name.substring(input.files[i].name.lastIndexOf('.')+1).toLowerCase()
+                if ((ext == 'jpg') || (ext == 'png'))
+                {
+                    $("#msg").text("Files are supported")
+                }
+                else
+                {
+                    $("#msg").text("Files are NOT supported")
+                    document.getElementById("file-picker").value ="";
+                }
+            }
+        } );
+    </script>
+
+{% endblock %}

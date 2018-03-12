@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block main %}
+  {{entry.title}}
+  <p>Created {{ entry.timestamp }}</p>
+  {{ entry.content }}
+{% endblock %}
